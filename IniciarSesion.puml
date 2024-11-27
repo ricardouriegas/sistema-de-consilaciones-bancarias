@@ -6,16 +6,12 @@ actor Administrador as admin
 actor Auditor as auditor
 
 rectangle "Sistema de Conciliaciones Bancarias" {
-    Usuario -> (Iniciar Sesión) : Credenciales
+    Usuario -> (Ingresar Datos)
+    (Ingresar Datos) -> (Validar Credenciales)
+    (Validar Credenciales) --> (Asignar Sesión Activa)
 
-    (Iniciar Sesión) -> (Validar Credenciales)
-    (Iniciar Sesión) --> (Asignar Sesión Activa)
-
-    (Validar Credenciales) --> (Mostrar Mensaje de Error) : Si falla
-    (Asignar Sesión Activa) --> (Mostrar Menú de Usuario) : Segun Rol
-
-    (Validar Credenciales) -> admin : Si es Administrador
-    (Validar Credenciales) -> auditor : Si es Auditor
+    (Asignar Sesión Activa) --> admin : Si es Administrador
+    (Asignar Sesión Activa) --> auditor : Si es Auditor
 }
 
 @enduml
