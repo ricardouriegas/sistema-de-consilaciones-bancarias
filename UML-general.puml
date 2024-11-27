@@ -1,0 +1,56 @@
+@startuml auditoria
+title Sistema de Consilaciones Bancarias
+left to right direction
+
+actor "Usuario" as Usuario
+
+rectangle "Sistema de Consilaciones Bancarias" {
+    Usuario -> (Iniciar Sesión)
+    Usuario -> (Cerrar Sesión)
+    
+    actor "Administrador" as admin
+    actor "Auditor" as auditor
+
+    (Iniciar Sesión) -> admin
+    (Iniciar Sesión) -> auditor
+
+    admin -> (Gestionar Usuarios)
+    admin -> (Gestionar Cuenta Bancaria)
+    admin -> (Consilacion Bancaria)
+    admin -> (Ingresos y Egresos)
+    admin -> (Libro Contable) 
+
+    auditor -> (Ingresos y Egresos)
+
+    ' includes y extends
+    (Consilacion Bancaria) .-> (Ingresos y Egresos) : <<include>>
+    (Consilacion Bancaria) .-> (Libro Contable) : <<include>>
+    (Consilacion Bancaria) .-> (Gestionar Cuenta Bancaria) : <<include>>
+
+    (Gestionar Usuarios) .-> (Alta de Usuario) : <<include>>
+    (Gestionar Usuarios) .-> (Baja de Usuario) : <<include>>
+    (Gestionar Usuarios) .-> (Modificar Usuario) : <<include>>
+
+    (Gestionar Cuenta Bancaria) .-> (Alta de Cuenta Bancaria) : <<include>>
+    (Gestionar Cuenta Bancaria) .-> (Baja de Cuenta Bancaria) : <<include>>
+    (Gestionar Cuenta Bancaria) .-> (Modificar Cuenta Bancaria) : <<include>>
+
+    (Ingresos y Egresos) .-> (Ingresos) : <<include>>
+    (Ingresos y Egresos) .-> (Egresos) : <<include>>
+    ' (Ingresos y Egresos) .-> (Modificar Ingresos) : <<include>>
+    ' (Ingresos y Egresos) .-> (Modificar Egresos) : <<include>>
+
+    (Libro Contable) .-> (Ingresos) : <<include>>
+    (Libro Contable) .-> (Egresos) : <<include>>
+
+}
+
+actor "Base de Datos" as db
+
+db -- (Gestionar Usuarios)
+db -- (Gestionar Cuenta Bancaria)
+db -- (Consilacion Bancaria)
+db -- (Ingresos y Egresos)
+db -- (Libro Contable)
+
+@enduml
