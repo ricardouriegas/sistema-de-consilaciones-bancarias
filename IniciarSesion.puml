@@ -5,7 +5,7 @@ actor Usuario
 actor Administrador as admin
 actor Auditor as auditor
 
-rectangle "Sistema de Conciliaciones Bancarias" {
+rectangle "Iniciar Sesion" {
     Usuario -> (Ingresar Datos)
     (Ingresar Datos) -> (Validar Credenciales)
     (Validar Credenciales) --> (Asignar Sesión Activa)

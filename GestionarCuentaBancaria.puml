@@ -1,0 +1,18 @@
+@startuml GestionarCuentaBancaria
+title Gestionar Cuenta Bancaria
+
+actor Administrador as admin
+
+rectangle "Sistema de Conciliaciones Bancarias" {
+    admin -> (Seleccionar Acción)
+
+    (Seleccionar Acción) --> (Registrar Cuenta) : Si elige Registrar
+    (Seleccionar Acción) --> (Actualizar Cuenta) : Si elige Actualizar
+    (Seleccionar Acción) --> (Eliminar Cuenta) : Si elige Eliminar
+
+    (Registrar Cuenta) -> (Guardar Datos de la Cuenta)
+    (Actualizar Cuenta) -> (Guardar Cambios)
+    (Eliminar Cuenta) -> (Confirmar Eliminación)
+}
+
+@enduml
