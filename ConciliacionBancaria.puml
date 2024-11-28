@@ -1,0 +1,16 @@
+@startuml ConciliacionBancaria
+title Conciliación Bancaria
+
+actor Administrador as admin
+actor "Base de Datos" as bd
+
+rectangle "Sistema de Conciliaciones Bancarias" {
+    admin -> (Seleccionar Cuenta Bancaria)
+    (Seleccionar Cuenta Bancaria) -> (Verificar Movimientos)
+
+    (Verificar Movimientos) --> (Conciliar Movimientos)
+    (Conciliar Movimientos) -> bd
+    bd --> (Generar Reporte) 
+}
+
+@enduml

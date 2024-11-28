@@ -2,6 +2,7 @@
 title Gestionar Cuenta Bancaria
 
 actor Administrador as admin
+actor "Base de Datos" as bd
 
 rectangle "Sistema de Conciliaciones Bancarias" {
     admin -> (Seleccionar Acción)
@@ -13,6 +14,10 @@ rectangle "Sistema de Conciliaciones Bancarias" {
     (Registrar Cuenta) -> (Guardar Datos de la Cuenta)
     (Actualizar Cuenta) -> (Guardar Cambios)
     (Eliminar Cuenta) -> (Confirmar Eliminación)
+
+    (Guardar Datos de la Cuenta) --> bd
+    (Guardar Cambios) --> bd
+    (Confirmar Eliminación) --> bd
 }
 
 @enduml

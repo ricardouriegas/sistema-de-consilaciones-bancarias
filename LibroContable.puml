@@ -1,0 +1,18 @@
+@startuml LibroContable
+title Libro Contable
+left to right direction
+
+actor Administrador as admin
+actor Auditor as auditor
+actor "Base de Datos" as bd
+
+rectangle "Sistema de Conciliaciones Bancarias" {
+    admin --> (Seleccionar Cuenta Bancaria)
+    auditor --> (Seleccionar Cuenta Bancaria)
+
+    (Seleccionar Cuenta Bancaria) --> (Consultar Libro Contable)
+    (Consultar Libro Contable) --> bd
+    bd --> (Generar Reporte Detallado)
+}
+
+@enduml

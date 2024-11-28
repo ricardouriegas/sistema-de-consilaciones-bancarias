@@ -1,0 +1,17 @@
+@startuml IngresosEgresos
+title Ingresos y Egresos
+left to right direction
+
+actor Administrador as admin
+actor Auditor as auditor
+actor "Base de Datos" as db
+
+rectangle "Sistema de Conciliaciones Bancarias" {
+    admin --> (Seleccionar Cuenta Bancaria)
+    auditor --> (Seleccionar Cuenta Bancaria)
+
+    (Seleccionar Cuenta Bancaria) --> (Consultar Movimientos)
+    (Consultar Movimientos) --> db
+}
+
+@enduml
