@@ -1,5 +1,5 @@
 @startuml IngresosEgresos
-title Ingresos y Egresos
+title Gestionar Ingresos y Egresos
 left to right direction
 
 actor Administrador as admin
@@ -10,8 +10,25 @@ rectangle "Sistema de Conciliaciones Bancarias" {
     admin --> (Seleccionar Cuenta Bancaria)
     auditor --> (Seleccionar Cuenta Bancaria)
 
-    (Seleccionar Cuenta Bancaria) --> (Consultar Movimientos)
-    (Consultar Movimientos) --> db
+    (Seleccionar Cuenta Bancaria) --> (Validar Cuenta) 
+    (Validar Cuenta) --> (Consultar Ingresos)
+    (Validar Cuenta) --> (Alta Ingresos)
+    (Validar Cuenta) --> (Modificar Ingresos)
+    (Validar Cuenta) --> (Baja Ingresos)
+    (Validar Cuenta) --> (Consultar Egresos)
+    (Validar Cuenta) --> (Alta Egresos)
+    (Validar Cuenta) --> (Modificar Egresos)
+    (Validar Cuenta) --> (Baja Egresos)
+
+    (Consultar Ingresos) --> db : "Obtener Ingresos"
+    (Alta Ingresos) --> db : "Insertar Ingreso"
+    (Modificar Ingresos) --> db : "Actualizar Ingreso"
+    (Baja Ingresos) --> db : "Eliminar Ingreso"
+
+    (Consultar Egresos) --> db : "Obtener Egresos"
+    (Alta Egresos) --> db : "Insertar Egreso"
+    (Modificar Egresos) --> db : "Actualizar Egreso"
+    (Baja Egresos) --> db : "Eliminar Egreso"
 }
 
 @enduml

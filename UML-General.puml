@@ -17,13 +17,13 @@ rectangle "Sistema de Consilaciones Bancarias" {
     admin -> (Gestionar Usuarios)
     admin -> (Gestionar Cuenta Bancaria)
     admin -> (Consilacion Bancaria)
-    admin -> (Ingresos y Egresos)
+    admin -> (Gestionar Ingresos y Egresos)
     admin -> (Libro Contable) 
 
-    auditor -> (Ingresos y Egresos)
+    auditor -> (Gestionar Ingresos y Egresos)
 
     ' includes y extends
-    (Consilacion Bancaria) .-> (Ingresos y Egresos) : <<include>>
+    (Consilacion Bancaria) .-> (Gestionar Ingresos y Egresos) : <<include>>
     (Consilacion Bancaria) .-> (Libro Contable) : <<include>>
     (Consilacion Bancaria) .-> (Gestionar Cuenta Bancaria) : <<include>>
 
@@ -35,13 +35,13 @@ rectangle "Sistema de Consilaciones Bancarias" {
     (Gestionar Cuenta Bancaria) .-> (Baja de Cuenta Bancaria) : <<include>>
     (Gestionar Cuenta Bancaria) .-> (Modificar Cuenta Bancaria) : <<include>>
 
-    (Ingresos y Egresos) .-> (Ingresos) : <<include>>
-    (Ingresos y Egresos) .-> (Egresos) : <<include>>
+    (Gestionar Ingresos y Egresos) .-> (Gestionar Ingresos) : <<include>>
+    (Gestionar Ingresos y Egresos) .-> (Gestionar Egresos) : <<include>>
     ' (Ingresos y Egresos) .-> (Modificar Ingresos) : <<include>>
     ' (Ingresos y Egresos) .-> (Modificar Egresos) : <<include>>
 
-    (Libro Contable) .-> (Ingresos) : <<include>>
-    (Libro Contable) .-> (Egresos) : <<include>>
+    (Libro Contable) .-> (Gestionar Ingresos) : <<include>>
+    (Libro Contable) .-> (Gestionar Egresos) : <<include>>
 
 }
 
@@ -50,7 +50,7 @@ actor "Base de Datos" as db
 db -- (Gestionar Usuarios)
 db -- (Gestionar Cuenta Bancaria)
 db -- (Consilacion Bancaria)
-db -- (Ingresos y Egresos)
+db -- (Gestionar Ingresos y Egresos)
 db -- (Libro Contable)
 
 @enduml
