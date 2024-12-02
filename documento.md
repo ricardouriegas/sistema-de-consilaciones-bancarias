@@ -1,14 +1,12 @@
 # Documento de Casos de Uso: Sistema de Conciliaciones Bancarias
 
----
-
 ## 1. Introducción
 
 ### Propósito del documento
 Este documento tiene como objetivo describir los requisitos funcionales y no funcionales del Sistema de Conciliaciones Bancarias. Su propósito principal es apoyar a los auditores en su labor, facilitando la revisión y validación de movimientos bancarios.
 
 ### Alcance del sistema
-El sistema permitirá gestionar múltiples cuentas bancarias, registrar ingresos y egresos, y generar reportes detallados para apoyar en auditorías. Está diseñado para un número ilimitado de auditores y optimiza los procesos de conciliación y análisis financiero.
+El sistema permitirá gestionar múltiples cuentas bancarias, registrar ingresos y egresos, realizar conciliaciones bancarias comparativas y generar reportes detallados para apoyar en auditorías. Está diseñado para un número ilimitado de auditores y optimiza los procesos de conciliación y análisis financiero.
 
 ---
 
@@ -27,7 +25,10 @@ El sistema permitirá gestionar múltiples cuentas bancarias, registrar ingresos
 - **Regla:** No se permitirá registrar usuarios con correos duplicados.
 
 ### RF4. Gestión de Cuentas Bancarias
-- **Descripción:** Los administradores podrán añadir, actualizar o eliminar cuentas bancarias.
+- **Descripción:** Los administradores podrán añadir, actualizar o eliminar cuentas bancarias. Cada cuenta incluirá:
+  - Clave del banco.
+  - Nombre del banco.
+  - RFC del cliente.
 - **Regla:** Cada número de cuenta debe ser único en el sistema.
 
 ### RF5. Registro de Movimientos
@@ -35,11 +36,14 @@ El sistema permitirá gestionar múltiples cuentas bancarias, registrar ingresos
 - **Regla:** Los movimientos deben estar asociados a una cuenta bancaria válida.
 
 ### RF6. Conciliación Bancaria
-- **Descripción:** El sistema permitirá verificar y conciliar movimientos internos contra los estados de cuenta bancarios.
+- **Descripción:** El sistema permitirá verificar y conciliar movimientos internos contra los estados de cuenta bancarios. Cada conciliación incluirá:
+  - Periodo de tiempo (día de inicio y día de término).
+  - Saldo inicial del libro contable del mes anterior.
+  - Comparación de movimientos internos (depósitos y cheques) contra movimientos externos (estado bancario).
 - **Regla:** Los movimientos conciliados no se pueden modificar.
 
 ### RF7. Generación de Reportes
-- **Descripción:** Los auditores podrán generar reportes detallados de movimientos conciliados o pendientes.
+- **Descripción:** Los auditores podrán generar reportes detallados de movimientos conciliados o pendientes por hacer.
 - **Regla:** Los reportes estarán disponibles en formatos como PDF o Excel.
 
 ---
@@ -84,11 +88,17 @@ El sistema permitirá gestionar múltiples cuentas bancarias, registrar ingresos
 
 ### CU3: Conciliación Bancaria
 - **Actor:** Auditor.
-- **Descripción:** Los auditores verifican y concilian movimientos internos contra estados bancarios.
+- **Descripción:** Los auditores realizan la conciliación bancaria comparando los registros internos con los obtenidos del banco.
 - **Flujo:**
-  1. Seleccionar cuenta bancaria.
-  2. Consultar movimientos.
-  3. Marcar como conciliados los movimientos correspondientes.
+  1. Seleccionar una cuenta bancaria (clave del banco, nombre del banco, RFC del cliente).
+  2. Definir el periodo de tiempo (día de inicio y día de término).
+  3. Consultar el saldo inicial del libro contable del mes anterior.
+  4. Comparar los movimientos internos (depósitos y cheques) contra los movimientos externos (estado de cuenta bancario).
+  5. Conciliar movimientos y registrar discrepancias, si las hay.
+  6. Generar un reporte detallado.
+- **Reglas:**
+  - Los movimientos conciliados no se pueden modificar.
+  - El periodo debe estar dentro de los límites establecidos.
 
 ### CU4: Generación de Reportes
 - **Actor:** Auditor.

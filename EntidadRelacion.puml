@@ -1,0 +1,43 @@
+
+@startuml
+entity "Usuario" as User {
+    + userId : int
+    + username : string
+    + password : string
+    + fullName : string
+    + credentialNumber : string
+    + birthDate : date
+    + professionalLicenseNumber : string
+    + address : string
+    + phone : string
+    + email : string
+    + gender : string
+    + age : int
+    + weight : decimal
+}
+
+entity "Cuenta Bancaria" as BankAccount {
+    + accountId : int
+    + accountNumber : string
+    + balance : decimal
+}
+
+entity "Transacción" as Transaction {
+    + transactionId : int
+    + amount : decimal
+    + transactionDate : date
+    + type : string
+}
+
+entity "Reporte" as Report {
+    + reportId : int
+    + reportDate : date
+    + reportType : string
+}
+
+User ||--o{ BankAccount : owns
+User ||--o{ Transaction : initiates
+BankAccount ||--o{ Transaction : involves
+User ||--o{ Report : generates
+
+@enduml
