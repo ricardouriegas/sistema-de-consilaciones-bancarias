@@ -1,0 +1,37 @@
+@startuml GestionarEgresos
+title Gestionar Egresos
+left to right direction
+
+actor Administrador as admin
+actor Auditor as auditor
+actor "Base de Datos" as db
+
+rectangle "Sistema de Conciliaciones Bancarias" {
+    admin --> (Seleccionar Acción)
+    auditor --> (Seleccionar Acción)
+    
+    (Seleccionar Acción) --> (Registrar Egreso)
+    (Seleccionar Acción) --> (Modificar Egreso)
+    (Seleccionar Acción) --> (Eliminar Egreso)
+    
+    (Registrar Egreso) --> (Ingresar Datos)
+    (Ingresar Datos) --> (Validar Datos)
+    (Validar Datos) --> (Guardar Egreso)
+    (Guardar Egreso) --> db
+    (Guardar Egreso) --> admin : Egreso registrado
+    
+    (Modificar Egreso) --> (Seleccionar Egreso)
+    (Seleccionar Egreso) --> (Ingresar Nuevos Datos)
+    (Ingresar Nuevos Datos) --> (Validar Datos)
+    (Validar Datos) --> (Actualizar Egreso)
+    (Actualizar Egreso) --> db
+    (Actualizar Egreso) --> admin : Egreso actualizado
+    
+    (Eliminar Egreso) --> (Seleccionar Egreso)
+    (Seleccionar Egreso) --> (Confirmar Eliminación)
+    (Confirmar Eliminación) --> (Eliminar Egreso)
+    (Eliminar Egreso) --> db
+    (Eliminar Egreso) --> admin : Egreso eliminado
+}
+
+@enduml

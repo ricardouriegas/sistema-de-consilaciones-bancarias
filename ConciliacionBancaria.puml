@@ -1,16 +1,23 @@
 @startuml ConciliacionBancaria
 title Conciliación Bancaria
+left to right direction
 
 actor Administrador as admin
-actor "Base de Datos" as bd
+actor "Base de Datos" as db
 
 rectangle "Sistema de Conciliaciones Bancarias" {
-    admin -> (Seleccionar Cuenta Bancaria)
-    (Seleccionar Cuenta Bancaria) -> (Verificar Movimientos)
+    admin --> (Iniciar Conciliación)
 
-    (Verificar Movimientos) --> (Conciliar Movimientos)
-    (Conciliar Movimientos) -> bd
-    bd --> (Generar Reporte) 
+    (Iniciar Conciliación) --> (Obtener Extracto Bancario)
+    (Obtener Extracto Bancario) --> db
+
+    (Iniciar Conciliación) --> (Obtener Registros Contables)
+    (Obtener Registros Contables) --> db
+
+    (Iniciar Conciliación) --> (Comparar Transacciones)
+
+    (Comparar Transacciones) --> (Generar Informe)
+    (Generar Informe) --> admin
 }
 
 @enduml

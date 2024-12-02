@@ -1,0 +1,17 @@
+@startuml AltaDeCuentaBancaria
+title Alta de Cuenta Bancaria
+left to right direction
+
+actor Administrador as admin
+actor "Base de Datos" as db
+
+rectangle "Sistema de Conciliaciones Bancarias" {
+    admin -> (Ingresar Datos de la Cuenta)
+    (Ingresar Datos de la Cuenta) --> (Validar Datos)
+    (Validar Datos) --> (Guardar Cuenta)
+    (Guardar Cuenta) --> db
+    (Guardar Cuenta) --> admin : Cuenta agregada
+    (Validar Datos) --> admin : Error en datos
+}
+
+@enduml

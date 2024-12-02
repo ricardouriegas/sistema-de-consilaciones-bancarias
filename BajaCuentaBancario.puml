@@ -1,0 +1,16 @@
+@startuml BajaDeCuentaBancaria
+title Baja de Cuenta Bancaria
+left to right direction
+
+actor Administrador as admin
+actor "Base de Datos" as db
+
+rectangle "Sistema de Conciliaciones Bancarias" {
+    admin -> (Seleccionar Cuenta)
+    (Seleccionar Cuenta) --> (Confirmar Eliminación)
+    (Confirmar Eliminación) --> (Eliminar Cuenta)
+    (Eliminar Cuenta) --> db
+    (Eliminar Cuenta) --> admin : Cuenta eliminada
+}
+
+@enduml

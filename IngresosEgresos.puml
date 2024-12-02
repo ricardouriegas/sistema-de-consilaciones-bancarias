@@ -1,4 +1,4 @@
-@startuml IngresosEgresos
+@startuml GestionarIngresosEgresos
 title Gestionar Ingresos y Egresos
 left to right direction
 
@@ -7,28 +7,38 @@ actor Auditor as auditor
 actor "Base de Datos" as db
 
 rectangle "Sistema de Conciliaciones Bancarias" {
-    admin --> (Seleccionar Cuenta Bancaria)
-    auditor --> (Seleccionar Cuenta Bancaria)
+    admin --> (Seleccionar Acción)
+    auditor --> (Seleccionar Acción)
 
-    (Seleccionar Cuenta Bancaria) --> (Validar Cuenta) 
-    (Validar Cuenta) --> (Consultar Ingresos)
-    (Validar Cuenta) --> (Alta Ingresos)
-    (Validar Cuenta) --> (Modificar Ingresos)
-    (Validar Cuenta) --> (Baja Ingresos)
-    (Validar Cuenta) --> (Consultar Egresos)
-    (Validar Cuenta) --> (Alta Egresos)
-    (Validar Cuenta) --> (Modificar Egresos)
-    (Validar Cuenta) --> (Baja Egresos)
+    (Seleccionar Acción) --> (Registrar Ingreso)
+    (Seleccionar Acción) --> (Registrar Egreso)
+    (Seleccionar Acción) --> (Modificar Ingreso)
+    (Seleccionar Acción) --> (Modificar Egreso)
+    (Seleccionar Acción) --> (Eliminar Ingreso)
+    (Seleccionar Acción) --> (Eliminar Egreso)
 
-    (Consultar Ingresos) --> db : "Obtener Ingresos"
-    (Alta Ingresos) --> db : "Insertar Ingreso"
-    (Modificar Ingresos) --> db : "Actualizar Ingreso"
-    (Baja Ingresos) --> db : "Eliminar Ingreso"
+    (Registrar Ingreso) --> (Ingresar Datos)
+    (Registrar Egreso) --> (Ingresar Datos)
+    (Modificar Ingreso) --> (Seleccionar Ingreso)
+    (Modificar Egreso) --> (Seleccionar Egreso)
+    (Eliminar Ingreso) --> (Seleccionar Ingreso)
+    (Eliminar Egreso) --> (Seleccionar Egreso)
 
-    (Consultar Egresos) --> db : "Obtener Egresos"
-    (Alta Egresos) --> db : "Insertar Egreso"
-    (Modificar Egresos) --> db : "Actualizar Egreso"
-    (Baja Egresos) --> db : "Eliminar Egreso"
+    (Ingresar Datos) --> (Validar Datos)
+    (Validar Datos) --> (Guardar Datos)
+    (Validar Datos) --> db
+    (Guardar Datos) --> db
+
+    (Seleccionar Ingreso) --> (Modificar Datos)
+    (Modificar Datos) --> (Validar Datos)
+
+    (Seleccionar Egreso) --> (Modificar Datos)
+    (Modificar Datos) --> (Validar Datos)
+
+    (Seleccionar Ingreso) --> (Confirmar Eliminación)
+    (Seleccionar Egreso) --> (Confirmar Eliminación)
+    (Confirmar Eliminación) --> (Eliminar Datos)
+    (Eliminar Datos) --> db
 }
 
 @enduml

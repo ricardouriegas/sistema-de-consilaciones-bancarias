@@ -1,0 +1,17 @@
+@startuml AltaDeUsuario
+title Alta de Usuario
+left to right direction
+
+actor Administrador as admin
+actor "Base de Datos" as db
+
+rectangle "Sistema de Conciliaciones Bancarias" {
+    admin -> (Ingresar Datos del Usuario)
+    (Ingresar Datos del Usuario) --> (Validar Datos)
+    (Validar Datos) --> (Guardar Usuario)
+    (Guardar Usuario) --> db
+    (Guardar Usuario) --> admin : Usuario agregado
+    (Validar Datos) --> admin : Error en datos
+}
+
+@enduml

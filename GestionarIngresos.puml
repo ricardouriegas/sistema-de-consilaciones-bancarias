@@ -1,0 +1,37 @@
+@startuml GestionarIngresos
+title Gestionar Ingresos
+left to right direction
+
+actor Administrador as admin
+actor Auditor as auditor
+actor "Base de Datos" as db
+
+rectangle "Sistema de Conciliaciones Bancarias" {
+    admin --> (Seleccionar Acción)
+    auditor --> (Seleccionar Acción)
+    
+    (Seleccionar Acción) --> (Registrar Ingreso)
+    (Seleccionar Acción) --> (Modificar Ingreso)
+    (Seleccionar Acción) --> (Eliminar Ingreso)
+    
+    (Registrar Ingreso) --> (Ingresar Datos)
+    (Ingresar Datos) --> (Validar Datos)
+    (Validar Datos) --> (Guardar Ingreso)
+    (Guardar Ingreso) --> db
+    (Guardar Ingreso) --> admin : Ingreso registrado
+    
+    (Modificar Ingreso) --> (Seleccionar Ingreso)
+    (Seleccionar Ingreso) --> (Ingresar Nuevos Datos)
+    (Ingresar Nuevos Datos) --> (Validar Datos)
+    (Validar Datos) --> (Actualizar Ingreso)
+    (Actualizar Ingreso) --> db
+    (Actualizar Ingreso) --> admin : Ingreso actualizado
+    
+    (Eliminar Ingreso) --> (Seleccionar Ingreso)
+    (Seleccionar Ingreso) --> (Confirmar Eliminación)
+    (Confirmar Eliminación) --> (Eliminar Ingreso)
+    (Eliminar Ingreso) --> db
+    (Eliminar Ingreso) --> admin : Ingreso eliminado
+}
+
+@enduml

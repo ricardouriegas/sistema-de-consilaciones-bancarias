@@ -1,60 +1,91 @@
+@startuml ERD
+hide circle
 
-@startuml EntidadRelacion
-title Sistema de Consilaciones Bancarias
-left to right direction
-
-entity "Usuario" as User {
-    + userId : int
-    + username : string
-    + password : string
-    + fullName : string
-    + credentialNumber : string
-    + birthDate : date
-    + professionalLicenseNumber : string
-    + address : string
-    + phone : string
-    + email : string
-    + gender : string
-    + age : int
-    + weight : decimal
+' Definición de entidades
+entity "Usuario" as Usuario {
+    * id_usuario : int
+    --
+    nombre_completo : string
+    num_folio_ine : string
+    fecha_nacimiento : date
+    num_cedula_profesional : string
+    direccion : string
+    telefono : string
+    correo_electronico : string
+    sexo : string
+    edad : int
+    peso : float
 }
 
-entity "Cuenta Bancaria" as BankAccount {
-    + accountId : int
-    + accountNumber : string
-    + balance : decimal
+entity "Credenciales" as Credenciales {
+    * id_credencial : int
+    --
+    id_usuario : int
+    contrasena_encriptada : string
 }
 
-entity "Transacción" as Transaction {
-    + transactionId : int
-    + amount : decimal
-    + transactionDate : date
-    + type : string
+entity "Cuenta Bancaria" as CuentaBancaria {
+    * id_cuenta : int
+    --
+    id_usuario : int
+    numero_cuenta : string
+    banco : string
+    saldo : float
 }
 
-entity "Reporte" as Report {
-    + reportId : int
-    + reportDate : date
-    + reportType : string
+entity "Ingreso" as Ingreso {
+    * id_ingreso : int
+    --
+    id_cuenta : int
+    fecha : date
+    monto : float
+    descripcion : string
 }
 
-entity "Auditor" as Auditor {
-    + auditorId : int
-    + fullName : string
-    + credentialNumber : string
-    + birthDate : date
-    + professionalLicenseNumber : string
-    + address : string
-    + phone : string
-    + email : string
-    + gender : string
+entity "Egreso" as Egreso {
+    * id_egreso : int
+    --
+    id_cuenta : int
+    fecha : date
+    monto : float
+    descripcion : string
 }
 
-User ||--o{ BankAccount : owns
-User ||--o{ Transaction : initiates
-BankAccount ||--o{ Transaction : involves
-User ||--o{ Report : generates
-Auditor ||--o{ Report : reviews
-User ||--o{ Auditor : supports
+entity "Libro Contable" as LibroContable {
+    * id_libro : int
+    --
+    id_cuenta : int
+    fecha : date
+    saldo_total : float
+}
+
+entity "Estado de Cuenta" as EstadoDeCuenta {
+    * id_estado : int
+    --
+    id_cuenta : int
+    fecha : date
+    saldo_banco : float
+}
+
+entity "Conciliación Bancaria" as ConciliacionBancaria {
+    * id_conciliacion : int
+    --
+    id_cuenta : int
+    fecha : date
+    estado : string
+}
+
+' Relaciones entre entidades
+Usuario ||--o{ Credenciales : tiene
+Usuario ||--o{ CuentaBancaria : posee
+CuentaBancaria ||--o{ Ingreso : registra
+CuentaBancaria ||--o{ Egreso : registra
+CuentaBancaria ||--o{ LibroContable : actualiza
+CuentaBancaria ||--o{ EstadoDeCuenta : recibe
+CuentaBancaria ||--o{ ConciliacionBancaria : realiza
+ConciliacionBancaria }o--|| Ingreso : compara
+ConciliacionBancaria }o--|| Egreso : compara
+ConciliacionBancaria }o--|| EstadoDeCuenta : verifica
+ConciliacionBancaria }o--|| LibroContable : verifica
 
 @enduml

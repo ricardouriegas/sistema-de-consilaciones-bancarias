@@ -1,20 +1,14 @@
 @startuml CerrarSesion
 title Cerrar Sesión
-' left to right direction
+left to right direction
 
-actor Auditor as auditor
-actor Administrador as admin
-actor Usuario as user
+actor Usuario
 
 rectangle "Sistema de Conciliaciones Bancarias" {
-    (Solicitar Cierre de Sesión) as solicitud
-    (Terminar Sesión Activa) as terminar
-
-    solicitud .-> terminar : <<include>>
+    Usuario -> (Solicitar Cerrar Sesión)
+    (Solicitar Cerrar Sesión) --> (Confirmar Cierre)
+    (Confirmar Cierre) --> (Terminar Sesión)
+    (Terminar Sesión) --> Usuario : Sesión cerrada
 }
-
-admin --> solicitud
-auditor --> solicitud
-terminar --> user
 
 @enduml

@@ -1,0 +1,16 @@
+@startuml BajaDeUsuario
+title Baja de Usuario
+left to right direction
+
+actor Administrador as admin
+actor "Base de Datos" as db
+
+rectangle "Sistema de Conciliaciones Bancarias" {
+    admin -> (Seleccionar Usuario)
+    (Seleccionar Usuario) --> (Confirmar Eliminación)
+    (Confirmar Eliminación) --> (Eliminar Usuario)
+    (Eliminar Usuario) --> db
+    (Eliminar Usuario) --> admin : Usuario eliminado
+}
+
+@enduml

@@ -3,16 +3,20 @@ title Libro Contable
 left to right direction
 
 actor Administrador as admin
-actor Auditor as auditor
-actor "Base de Datos" as bd
+actor "Base de Datos" as db
 
 rectangle "Sistema de Conciliaciones Bancarias" {
-    admin --> (Seleccionar Cuenta Bancaria)
-    auditor --> (Seleccionar Cuenta Bancaria)
+    admin --> (Consultar Libro Contable)
 
-    (Seleccionar Cuenta Bancaria) --> (Consultar Libro Contable)
-    (Consultar Libro Contable) --> bd
-    bd --> (Generar Reporte Detallado)
+    (Consultar Libro Contable) --> (Obtener Transacciones)
+    (Obtener Transacciones) --> db
+
+    (Obtener Transacciones) --> (Mostrar Transacciones)
+    (Mostrar Transacciones) --> admin
+
+    admin --> (Generar Reporte)
+    (Generar Reporte) --> (Seleccionar Formato)
+    (Seleccionar Formato) --> (Exportar Reporte)
 }
 
 @enduml

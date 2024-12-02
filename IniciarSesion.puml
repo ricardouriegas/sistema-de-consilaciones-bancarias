@@ -1,17 +1,19 @@
 @startuml IniciarSesion
 title Iniciar Sesión
+left to right direction
 
 actor Usuario
 actor Administrador as admin
 actor Auditor as auditor
 
-rectangle "Iniciar Sesion" {
-    Usuario -> (Ingresar Datos)
-    (Ingresar Datos) -> (Validar Credenciales)
-    (Validar Credenciales) --> (Asignar Sesión Activa)
-
-    (Asignar Sesión Activa) --> admin : Si es Administrador
-    (Asignar Sesión Activa) --> auditor : Si es Auditor
+rectangle "Sistema de Conciliaciones Bancarias" {
+    Usuario -> (Ingresar Credenciales)
+    (Ingresar Credenciales) --> (Validar Credenciales)
+    (Validar Credenciales) --> (Acceso Permitido)
+    (Validar Credenciales) --> (Acceso Denegado)
+    (Acceso Permitido) --> admin : Si es Administrador
+    (Acceso Permitido) --> auditor : Si es Auditor
+    (Acceso Denegado) --> Usuario : Mostrar error
 }
 
 @enduml
