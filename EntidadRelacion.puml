@@ -1,7 +1,7 @@
 @startuml ERD
 hide circle
 
-' Definición de entidades
+' entidades
 entity "Usuario" as Usuario {
     * id_usuario : int
     --
@@ -75,7 +75,7 @@ entity "Conciliación Bancaria" as ConciliacionBancaria {
     estado : string
 }
 
-' Relaciones entre entidades
+' relaciones entre entidades
 Usuario ||--o{ Credenciales : tiene
 Usuario ||--o{ CuentaBancaria : posee
 CuentaBancaria ||--o{ Ingreso : registra
