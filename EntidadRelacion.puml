@@ -35,9 +35,23 @@ entity "Reporte" as Report {
     + reportType : string
 }
 
+entity "Auditor" as Auditor {
+    + auditorId : int
+    + fullName : string
+    + credentialNumber : string
+    + birthDate : date
+    + professionalLicenseNumber : string
+    + address : string
+    + phone : string
+    + email : string
+    + gender : string
+}
+
 User ||--o{ BankAccount : owns
 User ||--o{ Transaction : initiates
 BankAccount ||--o{ Transaction : involves
 User ||--o{ Report : generates
+Auditor ||--o{ Report : reviews
+User ||--o{ Auditor : supports
 
 @enduml
