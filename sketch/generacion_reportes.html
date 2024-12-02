@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generación de Reportes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .navbar {
+            background-color: #007bff;
+            padding: 10px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content h1 {
+            margin-top: 0;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        .form-container select,
+        .form-container input[type="date"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .buttons button:hover {
+            background-color: #0056b3;
+        }
+        .report-preview {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="menu_principal.html">Menú Principal</a>
+        </div>
+        <div class="navbar-right">
+            <a href="#">Cerrar Sesión</a>
+        </div>
+    </div>
+    <div class="content">
+        <h1>Generación de Reportes</h1>
+        <div class="form-container">
+            <form id="reportForm">
+                <label for="tipo_reporte">Tipo de Reporte:</label>
+                <select id="tipo_reporte" name="tipo_reporte" required>
+                    <option value="conciliados">Movimientos Conciliados</option>
+                    <option value="pendientes">Movimientos Pendientes</option>
+                </select>
+                <label for="formato_reporte">Formato del Reporte:</label>
+                <select id="formato_reporte" name="formato_reporte" required>
+                    <option value="pdf">PDF</option>
+                    <option value="excel">Excel</option>
+                </select>
+                <label for="fecha_inicio">Fecha de Inicio:</label>
+                <input type="date" id="fecha_inicio" name="fecha_inicio" required>
+                <label for="fecha_fin">Fecha de Fin:</label>
+                <input type="date" id="fecha_fin" name="fecha_fin" required>
+                <button type="submit">Generar Reporte</button>
+            </form>
+        </div>
+        <div class="report-preview">
+            <h2>Vista Previa del Reporte</h2>
+            <!-- Aquí se mostrará la vista previa del reporte -->
+        </div>
+    </div>
+    <script>
+        document.getElementById('reportForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Lógica para generar el reporte y mostrar la vista previa
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulta del Libro Contable</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+        }
+        .navbar {
+            background-color: #007bff;
+            padding: 10px;
+            color: #fff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content h1 {
+            margin-top: 0;
+        }
+        .form-container {
+            margin-top: 20px;
+        }
+        .form-container select,
+        .form-container input[type="date"],
+        .form-container input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .table-container {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid #ccc;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="navbar-left">
+            <a href="menu_principal.html">Menú Principal</a>
+        </div>
+        <div class="navbar-right">
+            <a href="#">Cerrar Sesión</a>
+        </div>
+    </div>
+    <div class="content">
+        <h1>Consulta del Libro Contable</h1>
+        <div class="form-container">
+            <form id="filterForm">
+                <label for="fecha_inicio">Fecha de Inicio:</label>
+                <input type="date" id="fecha_inicio" name="fecha_inicio">
+                <label for="fecha_fin">Fecha de Fin:</label>
+                <input type="date" id="fecha_fin" name="fecha_fin">
+                <label for="tipo_movimiento">Tipo de Movimiento:</label>
+                <select id="tipo_movimiento" name="tipo_movimiento">
+                    <option value="">Todos</option>
+                    <option value="ingreso">Ingreso</option>
+                    <option value="egreso">Egreso</option>
+                </select>
+                <label for="cuenta_bancaria">Cuenta Bancaria:</label>
+                <input type="text" id="cuenta_bancaria" name="cuenta_bancaria" placeholder="Cuenta Bancaria">
+                <button type="submit">Aplicar Filtros</button>
+            </form>
+        </div>
+        <div class="table-container">
+            <h2>Movimientos</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Monto</th>
+                        <th>Descripción</th>
+                        <th>Tipo de Movimiento</th>
+                        <th>Cuenta Bancaria</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Aquí se llenarán los datos de los movimientos -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        document.getElementById('filterForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            // Lógica para aplicar los filtros y mostrar los movimientos
+        });
+    </script>
+</body>
+</html>
