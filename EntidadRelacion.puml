@@ -1,5 +1,8 @@
 
-@startuml
+@startuml EntidadRelacion
+title Sistema de Consilaciones Bancarias
+left to right direction
+
 entity "Usuario" as User {
     + userId : int
     + username : string
