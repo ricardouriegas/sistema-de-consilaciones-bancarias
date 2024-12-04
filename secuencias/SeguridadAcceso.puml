@@ -1,0 +1,21 @@
+@startuml
+title Secuencia - Seguridad de Acceso
+
+actor Usuario as User
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+participant "Middleware de Seguridad" as Middleware
+
+User -> Sistema: Intentar acceder a funcionalidad
+Sistema -> Middleware: Verificar autenticación
+alt Usuario autenticado
+    Middleware -> Sistema: Autenticación válida
+    Sistema -> Middleware: Verificar autorización
+    Middleware -> Sistema: Autorización válida
+    Sistema -> User: Proporcionar acceso
+else Usuario no autenticado
+    Middleware -> Sistema: Autenticación inválida
+    Sistema -> User: Solicitar inicio de sesión
+end
+
+@enduml

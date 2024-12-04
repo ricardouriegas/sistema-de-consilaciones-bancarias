@@ -1,0 +1,27 @@
+@startuml
+title Secuencia - Consulta del Libro Contable
+
+actor Usuario as User
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+User -> UI: Acceder a "Consulta del Libro Contable"
+UI -> User: Mostrar opciones de filtros
+User -> UI: Aplicar filtros (fecha, tipo de movimiento, etc.)
+UI -> Sistema: Enviar filtros seleccionados
+Sistema -> BD: Consultar movimientos según filtros
+BD --> Sistema: Lista de movimientos
+Sistema -> UI: Enviar datos de movimientos
+UI -> User: Mostrar lista de movimientos y saldo total
+
+alt Ver detalles de un movimiento
+    User -> UI: Seleccionar movimiento
+    UI -> Sistema: Solicitar detalles del movimiento
+    Sistema -> BD: Obtener detalles del movimiento
+    BD --> Sistema: Detalles del movimiento
+    Sistema -> UI: Enviar detalles
+    UI -> User: Mostrar detalles del movimiento
+end
+
+@enduml
