@@ -1,0 +1,53 @@
+@startuml
+title Secuencia - Gestión de Cuentas Bancarias
+
+actor Administrador as Admin
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+Admin -> UI: Seleccionar "Gestionar Cuentas Bancarias"
+UI -> Admin: Mostrar opciones [Agregar, Modificar, Eliminar]
+
+alt Agregar Cuenta Bancaria
+    Admin -> UI: Seleccionar "Agregar Cuenta"
+    UI -> Admin: Mostrar formulario de registro
+    Admin -> UI: Ingresar datos de la cuenta
+    UI -> Sistema: Enviar datos para validación
+    Sistema -> Sistema: Validar datos
+    Sistema -> BD: Guardar nueva cuenta
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Cuenta agregada exitosamente
+    UI -> Admin: Mostrar mensaje de éxito
+else Modificar Cuenta Bancaria
+    Admin -> UI: Seleccionar "Modificar Cuenta"
+    UI -> Sistema: Solicitar lista de cuentas
+    Sistema -> BD: Obtener cuentas bancarias
+    BD --> Sistema: Lista de cuentas
+    Sistema -> UI: Mostrar lista de cuentas
+    Admin -> UI: Seleccionar cuenta a modificar
+    UI -> Admin: Mostrar datos actuales
+    Admin -> UI: Modificar datos de la cuenta
+    UI -> Sistema: Enviar datos actualizados
+    Sistema -> Sistema: Validar datos
+    Sistema -> BD: Actualizar datos de la cuenta
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Cuenta modificada exitosamente
+    UI -> Admin: Mostrar mensaje de éxito
+else Eliminar Cuenta Bancaria
+    Admin -> UI: Seleccionar "Eliminar Cuenta"
+    UI -> Sistema: Solicitar lista de cuentas
+    Sistema -> BD: Obtener cuentas bancarias
+    BD --> Sistema: Lista de cuentas
+    Sistema -> UI: Mostrar lista de cuentas
+    Admin -> UI: Seleccionar cuenta a eliminar
+    UI -> Admin: Mostrar confirmación
+    Admin -> UI: Confirmar eliminación
+    UI -> Sistema: Solicitar eliminación de la cuenta
+    Sistema -> BD: Eliminar cuenta
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Cuenta eliminada exitosamente
+    UI -> Admin: Mostrar mensaje de éxito
+end
+
+@enduml

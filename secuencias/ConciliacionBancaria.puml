@@ -1,0 +1,30 @@
+@startuml
+title Secuencia - Conciliación Bancaria
+
+actor Auditor as Auditor
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+Auditor -> UI: Acceder a "Conciliación Bancaria"
+UI -> Auditor: Mostrar formulario de conciliación
+Auditor -> UI: Seleccionar cuenta bancaria
+Auditor -> UI: Definir periodo (fecha inicio y fin)
+UI -> Sistema: Enviar datos de conciliación
+Sistema -> BD: Obtener movimientos internos
+Sistema -> BD: Obtener movimientos externos
+BD --> Sistema: Movimientos internos
+BD --> Sistema: Movimientos externos
+Sistema -> Sistema: Comparar movimientos
+alt Discrepancias encontradas
+    Sistema -> Auditor: Mostrar discrepancias
+    Auditor -> UI: Revisar y ajustar movimientos
+else Sin discrepancias
+    Sistema -> Auditor: Confirmar conciliación exitosa
+end
+Auditor -> Sistema: Generar reporte de conciliación
+Sistema -> BD: Guardar resultados de conciliación
+Sistema -> Auditor: Proporcionar reporte
+Auditor -> UI: Descargar o visualizar reporte
+
+@enduml

@@ -1,0 +1,15 @@
+@startuml CerrarSesion
+title Secuencia - Cerrar Sesión
+
+actor Usuario
+participant "Menú Principal" as Menu
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+
+Usuario -> Menu: Seleccionar "Cerrar Sesión"
+Menu -> Usuario: Solicitar confirmación
+Usuario -> Menu: Confirmar cierre de sesión
+Menu -> Sistema: Procesar cierre de sesión
+Sistema -> Sistema: Invalidar sesión
+Sistema -> Usuario: Redirigir a pantalla de inicio de sesión
+
+@enduml

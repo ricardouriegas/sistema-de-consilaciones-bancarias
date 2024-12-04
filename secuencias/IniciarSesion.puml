@@ -1,0 +1,21 @@
+@startuml IniciarSesion
+title Secuencia - Iniciar Sesión
+
+actor Usuario
+participant "Pantalla de Inicio de Sesión" as Pantalla
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+Usuario -> Pantalla: Ingresa correo y contraseña
+Pantalla -> Sistema: Enviar credenciales
+Sistema -> BD: Validar credenciales
+BD --> Sistema: Resultado de validación
+alt Credenciales correctas
+    Sistema -> Usuario: Acceso permitido
+    Usuario -> Sistema: Solicitar menú principal
+    Sistema -> Usuario: Mostrar menú según rol
+else Credenciales incorrectas
+    Sistema -> Usuario: Mostrar mensaje de error
+end
+
+@enduml

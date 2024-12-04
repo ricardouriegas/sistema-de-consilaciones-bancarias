@@ -1,0 +1,26 @@
+@startuml
+title Secuencia - Generación de Reportes
+
+actor Auditor as Auditor
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+Auditor -> UI: Acceder a "Generar Reportes"
+UI -> Auditor: Mostrar opciones de parámetros
+Auditor -> UI: Seleccionar parámetros del reporte
+Auditor -> UI: Seleccionar formato (PDF, Excel)
+UI -> Sistema: Enviar parámetros y formato seleccionados
+Sistema -> BD: Obtener datos según parámetros
+BD --> Sistema: Datos del reporte
+Sistema -> Sistema: Generar reporte en formato solicitado
+alt Reporte generado exitosamente
+    Sistema -> UI: Proporcionar enlace para descargar
+    UI -> Auditor: Mostrar opción de descargar o visualizar
+    Auditor -> UI: Descargar o visualizar reporte
+else Error en generación
+    Sistema -> UI: Mostrar mensaje de error
+    UI -> Auditor: Informar del error
+end
+
+@enduml

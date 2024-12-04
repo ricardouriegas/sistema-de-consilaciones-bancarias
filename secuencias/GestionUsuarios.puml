@@ -1,0 +1,53 @@
+@startuml GestionUsuarios
+title Secuencia - Gestión de Usuarios
+
+actor Administrador as Admin
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+Admin -> UI: Seleccionar "Gestionar Usuarios"
+UI -> Admin: Mostrar opciones [Agregar, Modificar, Eliminar]
+
+alt Agregar Usuario
+    Admin -> UI: Seleccionar "Agregar Usuario"
+    UI -> Admin: Mostrar formulario de registro
+    Admin -> UI: Ingresar datos del usuario
+    UI -> Sistema: Enviar datos para validación
+    Sistema -> Sistema: Validar datos
+    Sistema -> BD: Guardar nuevo usuario
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Usuario agregado exitosamente
+    UI -> Admin: Mostrar mensaje de éxito
+else Modificar Usuario
+    Admin -> UI: Seleccionar "Modificar Usuario"
+    UI -> Sistema: Solicitar lista de usuarios
+    Sistema -> BD: Obtener usuarios
+    BD --> Sistema: Lista de usuarios
+    Sistema -> UI: Mostrar lista de usuarios
+    Admin -> UI: Seleccionar usuario a modificar
+    UI -> Admin: Mostrar datos actuales
+    Admin -> UI: Modificar datos del usuario
+    UI -> Sistema: Enviar datos actualizados
+    Sistema -> Sistema: Validar datos
+    Sistema -> BD: Actualizar datos del usuario
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Usuario modificado exitosamente
+    UI -> Admin: Mostrar mensaje de éxito
+else Eliminar Usuario
+    Admin -> UI: Seleccionar "Eliminar Usuario"
+    UI -> Sistema: Solicitar lista de usuarios
+    Sistema -> BD: Obtener usuarios
+    BD --> Sistema: Lista de usuarios
+    Sistema -> UI: Mostrar lista de usuarios
+    Admin -> UI: Seleccionar usuario a eliminar
+    UI -> Admin: Mostrar confirmación
+    Admin -> UI: Confirmar eliminación
+    UI -> Sistema: Solicitar eliminación del usuario
+    Sistema -> BD: Eliminar usuario
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Usuario eliminado exitosamente
+    UI -> Admin: Mostrar mensaje de éxito
+end
+
+@enduml

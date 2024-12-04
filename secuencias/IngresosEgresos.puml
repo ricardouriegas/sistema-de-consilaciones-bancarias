@@ -1,0 +1,53 @@
+@startuml
+title Secuencia - Gestión de Ingresos y Egresos
+
+actor Usuario as User
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+User -> UI: Acceder a "Gestionar Ingresos y Egresos"
+UI -> User: Mostrar opciones [Registrar, Modificar, Eliminar]
+
+alt Registrar Ingreso/Egreso
+    User -> UI: Seleccionar "Registrar"
+    UI -> User: Mostrar formulario de registro
+    User -> UI: Ingresar datos del movimiento
+    UI -> Sistema: Enviar datos para validación
+    Sistema -> Sistema: Validar datos
+    Sistema -> BD: Guardar nuevo movimiento
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Movimiento registrado exitosamente
+    UI -> User: Mostrar mensaje de éxito
+else Modificar Ingreso/Egreso
+    User -> UI: Seleccionar "Modificar"
+    UI -> Sistema: Solicitar lista de movimientos
+    Sistema -> BD: Obtener movimientos
+    BD --> Sistema: Lista de movimientos
+    Sistema -> UI: Mostrar lista de movimientos
+    User -> UI: Seleccionar movimiento a modificar
+    UI -> User: Mostrar datos actuales
+    User -> UI: Modificar datos del movimiento
+    UI -> Sistema: Enviar datos actualizados
+    Sistema -> Sistema: Validar datos
+    Sistema -> BD: Actualizar movimiento
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Movimiento modificado exitosamente
+    UI -> User: Mostrar mensaje de éxito
+else Eliminar Ingreso/Egreso
+    User -> UI: Seleccionar "Eliminar"
+    UI -> Sistema: Solicitar lista de movimientos
+    Sistema -> BD: Obtener movimientos
+    BD --> Sistema: Lista de movimientos
+    Sistema -> UI: Mostrar lista de movimientos
+    User -> UI: Seleccionar movimiento a eliminar
+    UI -> User: Mostrar confirmación
+    User -> UI: Confirmar eliminación
+    UI -> Sistema: Solicitar eliminación del movimiento
+    Sistema -> BD: Eliminar movimiento
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Movimiento eliminado exitosamente
+    UI -> User: Mostrar mensaje de éxito
+end
+
+@enduml
