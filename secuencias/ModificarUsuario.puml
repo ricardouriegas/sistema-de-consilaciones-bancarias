@@ -1,0 +1,32 @@
+@startuml ModificarUsuario
+title Secuencia - Modificar Usuario
+
+actor Administrador as Admin
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+Admin -> UI: Seleccionar "Modificar Usuario"
+UI -> Sistema: Solicitar lista de usuarios
+Sistema -> BD: Obtener usuarios
+BD --> Sistema: Lista de usuarios
+Sistema -> UI: Mostrar lista de usuarios
+Admin -> UI: Seleccionar usuario a modificar
+UI -> Sistema: Solicitar datos del usuario
+Sistema -> BD: Obtener datos del usuario
+BD --> Sistema: Datos actuales
+Sistema -> UI: Mostrar datos actuales
+Admin -> UI: Ingresar nuevos datos
+UI -> Sistema: Enviar nuevos datos para validación
+Sistema -> Sistema: Validar datos
+alt Datos válidos
+    Sistema -> BD: Actualizar datos del usuario
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Usuario actualizado exitosamente
+    UI -> Admin: Mostrar mensaje de éxito
+else Datos inválidos
+    Sistema -> UI: Mostrar mensaje de error
+    UI -> Admin: Notificar error en datos
+end
+
+@enduml

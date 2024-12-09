@@ -1,0 +1,32 @@
+@startuml ModificarCuentaBancaria
+title Secuencia - Modificar Cuenta Bancaria
+
+actor Administrador as Admin
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+Admin -> UI: Seleccionar "Modificar Cuenta Bancaria"
+UI -> Sistema: Solicitar lista de cuentas
+Sistema -> BD: Obtener cuentas bancarias
+BD --> Sistema: Lista de cuentas
+Sistema -> UI: Mostrar lista de cuentas
+Admin -> UI: Seleccionar cuenta a modificar
+UI -> Sistema: Solicitar datos de la cuenta
+Sistema -> BD: Obtener datos de la cuenta
+BD --> Sistema: Datos actuales
+Sistema -> UI: Mostrar datos actuales
+Admin -> UI: Ingresar nuevos datos
+UI -> Sistema: Enviar nuevos datos para validación
+Sistema -> Sistema: Validar datos
+alt Datos válidos
+    Sistema -> BD: Actualizar datos de la cuenta
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Cuenta actualizada exitosamente
+    UI -> Admin: Mostrar mensaje de éxito
+else Datos inválidos
+    Sistema -> UI: Mostrar mensaje de error
+    UI -> Admin: Notificar error en datos
+end
+
+@enduml

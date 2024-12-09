@@ -1,0 +1,23 @@
+@startuml BajaDeCuentaBancaria
+title Secuencia - Baja de Cuenta Bancaria
+
+actor Administrador as Admin
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+Admin -> UI: Seleccionar "Eliminar Cuenta Bancaria"
+UI -> Sistema: Solicitar lista de cuentas
+Sistema -> BD: Obtener cuentas bancarias
+BD --> Sistema: Lista de cuentas
+Sistema -> UI: Mostrar lista de cuentas
+Admin -> UI: Seleccionar cuenta a eliminar
+UI -> Admin: Solicitar confirmación
+Admin -> UI: Confirmar eliminación
+UI -> Sistema: Solicitar eliminación de la cuenta
+Sistema -> BD: Eliminar cuenta
+BD --> Sistema: Confirmación
+Sistema -> UI: Cuenta eliminada exitosamente
+UI -> Admin: Mostrar mensaje de éxito
+
+@enduml

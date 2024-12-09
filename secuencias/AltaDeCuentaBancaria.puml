@@ -1,0 +1,24 @@
+@startuml AltaDeCuentaBancaria
+title Secuencia - Alta de Cuenta Bancaria
+
+actor Administrador as Admin
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+Admin -> UI: Seleccionar "Agregar Cuenta Bancaria"
+UI -> Admin: Mostrar formulario de registro
+Admin -> UI: Ingresar datos de la cuenta
+UI -> Sistema: Enviar datos para validación
+Sistema -> Sistema: Validar datos
+alt Datos válidos
+    Sistema -> BD: Guardar nueva cuenta
+    BD --> Sistema: Confirmación
+    Sistema -> UI: Cuenta agregada exitosamente
+    UI -> Admin: Mostrar mensaje de éxito
+else Datos inválidos
+    Sistema -> UI: Mostrar mensaje de error
+    UI -> Admin: Notificar error en datos
+end
+
+@enduml

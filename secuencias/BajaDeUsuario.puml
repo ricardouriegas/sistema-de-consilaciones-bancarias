@@ -1,0 +1,23 @@
+@startuml BajaDeUsuario
+title Secuencia - Baja de Usuario
+
+actor Administrador as Admin
+participant "Interfaz de Usuario" as UI
+participant "Sistema de Conciliaciones Bancarias" as Sistema
+database "Base de Datos" as BD
+
+Admin -> UI: Seleccionar "Eliminar Usuario"
+UI -> Sistema: Solicitar lista de usuarios
+Sistema -> BD: Obtener usuarios
+BD --> Sistema: Lista de usuarios
+Sistema -> UI: Mostrar lista de usuarios
+Admin -> UI: Seleccionar usuario a eliminar
+UI -> Admin: Solicitar confirmación
+Admin -> UI: Confirmar eliminación
+UI -> Sistema: Solicitar eliminación del usuario
+Sistema -> BD: Eliminar usuario
+BD --> Sistema: Confirmación
+Sistema -> UI: Usuario eliminado exitosamente
+UI -> Admin: Mostrar mensaje de éxito
+
+@enduml

@@ -63,7 +63,10 @@
 \thispagestyle{empty} % Quita el número de página en esta página
 \newpage
 
-\tableofcontents
+
+\tableofcontents            % generate and include a table of contents
+\newpage
+\listoffigures              % generate and include a list of figures
 \newpage
 
 % ---------------------------------------------------------------------------- %
@@ -734,6 +737,7 @@ Con la aprobación de este documento, se da inicio a la fase de desarrollo, dond
     \caption{Seguridad de Acceso: Permite a los usuarios cambiar su contraseña y activar la autenticación de múltiples factores.}
 \end{figure}
 
+\newpage
 \subsection{Diagrama de Casos de Uso}
 
 \begin{figure}[H]
@@ -832,6 +836,7 @@ Con la aprobación de este documento, se da inicio a la fase de desarrollo, dond
     \caption{Diagrama Individual: Libro Contable}
 \end{figure}
 
+\newpage
 \subsection{Diagramas de Secuencia}
 \begin{figure}[H]
     \centering
@@ -887,7 +892,44 @@ Con la aprobación de este documento, se da inicio a la fase de desarrollo, dond
     \caption{Diagrama de Secuencia: Seguridad de Acceso}
 \end{figure}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{secuencia/AltaDeCuentaBancaria.png}
+    \caption{Diagrama de Secuencia: Alta de Cuenta Bancaria}
+\end{figure}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{secuencia/AltaDeUsuario.png}
+    \caption{Diagrama de Secuencia: Alta de Usuario}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{secuencia/BajaDeCuentaBancaria.png}
+    \caption{Diagrama de Secuencia: Baja de Cuenta Bancaria}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{secuencia/BajaDeUsuario.png}
+    \caption{Diagrama de Secuencia: Baja de Usuario}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{secuencia/ModificarCuentaBancaria.png}
+    \caption{Diagrama de Secuencia: Modificar Cuenta Bancaria}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{secuencia/ModificarUsuario.png}
+    \caption{Diagrama de Secuencia: Modificar Usuario}
+\end{figure}
+
+
+\newpage
 \subsection{Diagrama Entidad-Relación}
 \begin{figure}[H]
     \centering
